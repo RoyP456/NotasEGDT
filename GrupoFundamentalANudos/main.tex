@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Del Grupo fundamental a los invariantes de nudos}
+\author{Dr. Jesús Rodrígues Viarato | jesusr@cimat.mx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+    \section{Octubre 12}
+    \begin{definition}[Nudos]
+      Un nudo se define como un encaje del círculo en $\mathbb{R}^3$, $\mathbb{S}^3 \to \mathbb{R}^3 \sim \mathbb{S}^3 - \text{pto}$. 
+    \end{definition}
+    Nosotros podemos utilizar diagramas para mostrar el encaje del nudo. 
+
+    En la teoría de nudos, lo que nos interesa es distinguir los tipos de nudo. Para esto tenemos que determinar que significa que dos nudos sean en el mismo. Decimos que dos nudos son el mismo si puedo deformar uno en otro. Para esto podemos hacer ciertos movimientos permitidos. 
+    \begin{definition}[(mala definición) Equivalencia de nudos]
+      Sea $k_1$ y $k_2$ dos nudos en $\mathbb{R}^3$ decimos que $k_1 = k_2 $ si existe una homotopía $H: \mathbb{S}^1 \times [0,1] \to \mathbb{R}^3$ que satisface que $H(x,0)=i(x)$ y $H(x,1)=j(x)$ tal que $im(i)=k_1$ y $im(j)=k_2$.
+    \end{definition}
+
+    Esta es el primer intento de definir una equivalencia de nudos. Sin embargo está mal. El profe demostró que el primer nudo no trivial es homotópicamente equivalente al nudo trivial, al colapsar el nudo hasta un solo punto. Lo que necesitamos es que la homotopía sea diferenciable, sin embargo la diferenciabilidad no le gusta a los topólogos. Se ingeniaron la siguiente definición.
+    \begin{definition}[Homotopía ambiente]
+      Decimos que una homotopía ambiente es aquella que homotopa todo el espacio. $H: \mathbb{R}^3\times [0,1] \to \mathbb{R}^3$ donde $H(x,0)=x$ y $H(x,1)-f(x)$ sea un homeomorfismo tal que $f(k_1)=f(k_2)$
+    \end{definition}
+    Esta definición si asegura que la homotopía definida arriba sea diferenciable, sin embargo lo hacemos usando meramente continuidad. 
+
+    Con el motivo de clasificar los nudos, podemos tener unas \textbf{Tablas de nudos}. En estas tablas los nudos se ordenan por número de cruces.
+    \begin{itemize}
+      \item[0 Cruces:] Solo el trivial.
+      \item[1 Cruces:] Solo el que parece el infinito, que es el trivial medio doblado 
+      \item [2 Cruces:] Con un argumento mas elaborado uno puede probar que el único nudo con 2 cruces es el trivial también.
+      \item [3 Cruces:] Involucra el trivial y el trébol.
+      \item [4 Cruces:] Solo es el nudo figura ocho y es \textit{Anfiqueiral} (es el mismo nudo a su imagen espejo).
+      \item [5 Cruces:] Dos nudos mas el trivial. 
+      \item [6 Cruces:] Tres nudos mas el trivial. 
+      \item [7 Cruces:] Sólo dos.
+      \item [8 Cruces:] 21 nudos.
+      \item [9 Cruces:] 49 nudos.
+      \item [10 Cruces:] 105 nudos.
+    \end{itemize}
+    \textbf{Ejercicio: } Demuestra que sólo el trébol es el único nudo de tres cruces. 
+    \textbf{Ejercicio: } Demuestra que el nudo figura ocho es anfiqueiral. 
+    Estos nudos fueron hechos pot Tait a manita. El usó ciertos atajos que después se llamaron la \textbf{Conjeturas de Tait}. Estas conjeturas llegaron a varios libros de textos, uno de los primero más famosos el el Rolfsem, donde se usaron invariantes de nudos para verificar las tablas de Tait. Años después encontraron un error en las tablas del libro. 
+
+    Para no tener que comparar a mano los nudos, podemos usar los \textbf{invariantes}. 
+    \begin{definition}[Invariante de nudo]
+      Decimos que $\tau(k_1)$ es un invariante si se cumple la siguiente proposición
+      \begin{align*}
+        k_1=k_2\implies \tau(k_1)= \tau(k_2)
+      \end{align*}
+    \end{definition}
+
+    Uno de los invariantes de los espacios topológicos es el \textbf{grupo fundamental}. Cómo lo vamos a usar? No podemos usar simplemente $\pi_1(k_1)$ por que este es simplemente $\mathbb{Z}$. En vez tomamos el siguiente espacio topológico 
+   
+    \begin{definition}[Espacio exterior]
+      El espacio exterior de un nudo $k$ es $E_k=\mathbb{R}^3- k$.
+    \end{definition}
+
+    Entonces podemos usar el grupo fundamental del espacio exterior $\pi(E_k)$.
+
+    \section{Octubre 13}
+
+    Recordamos la definición del producto libre:
+    \begin{definition}[producto libre]
+      El producto libre entre dos grupos $G,H$ es el grupo que se forma de las palabras de la forma $g_1,h_1,g_2,h_2 ... $ con $g_i \neq 1$ y $h_1\neq 1, \; \forall i$  excepto tal vez $h_1 , g_1$.  
+    \end{definition}
+
+    Nosotros podemos definir el prducto libre de rango $n$ dado por $*_{n} \mathbb{Z}=\mathbb{Z}*\mathbb{Z}...\mathbb{Z}$ $n$ veces. Resulta ser que el grupo $\mathbb{Z}*\mathbb{Z}$ es tan grande que existe una $\varphi: *_n\mathbb{Z}\to *_2\mathbb{Z}$ injectivo, un ejemplo es el mapeo $*_3\mathbb{Z}(x,y,z)$ donde $x\mapsto a^2$, $y\mapsto b$,  y $z\mapsto ab$.
+
+    \textbf{Ejercicio:} Probar que $*_n \mathbb{Z} \sim *_m \mathbb{Z} \iff m=n$. 
+    \newpage
+
+    \begin{theorem}[Teorema de Van-Kampen]
+      Sea $X=A\cup B $ donde $A, B$ son arco conexos, y $A \cap B$ también es arco conexa. Entonces el grupo fundamental de $X$ es 
+      \begin{align}
+        \pi_1(X)=\frac{\pi_1(A)*\pi_1(B)}{N}
+      \end{align}
+      Donde $N$ es el grupo $N=<<i_A(\alpha)\cdot i_B(\alpha)| \alpha \in \pi(A\cap B)>>$. Aquí $i_A: \pi_1(A\cap B) \to \pi(A)$ , $i_B: \pi_1(A\cap B) \to \pi(B)$.
+    \end{theorem}
+
+    Consideremos el siguiente ejemplo: Calculemos el grupo fundamental de $\mathbb{P}^2= \mathbb{D}^2/ x \sim -x , \forall x \in \partial \mathbb{D}^2$. Para usar Van-Kampen queremos partir nuestro espacio en dos. Sea $A = \mathbb{P}^2 - pto.$ donde el pto. no está en la frontera y $B$ una bola abierta de el punto retirado. Entonces, $\pi_1(B)= 1$ y $\pi(\mathbb{P}^2-pto.)=\mathbb{Z}$. Lo ultimo es cierto ya que es una dobre cubierta de el círculo. Finalmente nos queda determinar $\pi_1(A\cap B)$. Para esto, fijéminos en una vuelta del círculo, entonces siendo $\mathbb{P}^2-pto.$ una doble cubierta del círculo, un lazo en $B$ define un "doble" lazo en $A$. Finalmente, $N=2\mathbb{Z}$. Por Van-Kampen tenemos que $\pi_1(\mathbb{P}^2)=\mathbb{Z}_2$. 
+
+    Consideremos también el siguiente ejemplo: Presentaciones del grupo.
+
+    \textbf{Ejercicio: } Sea $X$ el espacio resultante de pegar la frontera de $\mathbb{D}^2$ a $\mathbb{S}^1$ dando $n$ vueltas y volver a hacerlo dando $m$ vueltas. Calcula $\pi_1(X)$. 
+
+    \subsection{Presentación del grupo del Nudo}
+    Recordemos que para usar el grupo fundamental no calculamos el grupo fundamental del nudo mismo, este es simplemente $\mathbb{Z}$. Lo hacemos en el espacio definido como el exterior del nudo. Para cada segmento del nudo se define una familia de curvas homotópicas que rodean el segmento.
+
+    \section{Octubre 14}
+
+    Primero calculamos una presentación del grupo fundamental 
+    \begin{align}
+      \pi_1(\mathbb{S}^3- k )=<x_1,...,x_n | x^{\pm 1}_{j}x_i x_j^{\mp1} = x_i+1, i = 1,...,n>
+    \end{align}
+    donde $n$ es el número de cruces del nudo y el signo y la correspondiente en cada dirección depende de cada cruce. A esto se le conoce como la presentación de Wirtinger. Las $x_i's$ son los generadores del grupo, para los cuales elegimos un arco, el cual es un segmento del nudo y a cada arco le corresponde un cruce. Entonces en cada cruce se va a tener una relación donde el signo depende del signo del cruce; el cual es determinado con la analogía del puente: si tu manejas sobre el cruce de abajo, y el cruce de arriba va de izquierda a derecha entonces es positivo, de lo contrario es negativo. Por ejemplo el grupo fundamental del nudo figura ocho es 
+    \begin{align}
+      <x_1,x_2,x_3,x_4 \quad |\quad  & x_3x_1x_3^{-1} =x_2 ,\qquad  x_1^{-1} x_2x_1 = x_3 , \\ & x_1x_3x_1^{-1}=x_4,\qquad  x_2^{-1}x_4x_2=x_1 >
+    \end{align}
+
+    Ahora lo complicado es usar las relaciones para identificar cuales palabras equivalen a cuales. A esto se le llama el \textbf{problema de la palabra}. Si ahora queremos comparar dos grupos fundamentales para verificar que dos nujdos son distintos entonces tenemos un problema de todos modos. Considera el  grupo fundamental del trébol:
+    \begin{align}
+      <x_1,x_2,x_3 \quad | \quad x_3^{-1}x_1x_3=x_2 ,\quad x_1^{-1}x_2 x_1 = x_3 , \quad x_2^{-1} x_3 x_2 = x_1 > 
+    \end{align}
+
+    La pregunta es \textbf{Cómo decidimos si dos presentaciones corresponden al mismo grupo?} Para hacer esto la única herramienta para maniobrar el el teorema de Tietze. 
+
+    \newpage
+    \begin{theorem}[Teorema de Tietze]
+      Dos representaciones representan grupos isomorfos si y solamente si se puede llevar de uno a otro bajo una sucesión de movidas. Estas son 
+      \begin{itemize}
+        \item Quitar o poner una relación que depende de otra.
+        \item Quitar o poner un generador que depende de los otros generadores.
+      \end{itemize}
+    \end{theorem}
+  \textbf{Ejercicio: }Una de las relaciones en la presentación de Wirtinger depende de las otras. Resulta ser que dicha presentación siempre nos da una relación de más.
+  Incluso con este teorema, distinguir os grupos sigue siendo terrible. Pero resulta ser que no todo está perdido. Tomemos el siguiente resultado: Sean $G$ ,$K$ y $H$ dos grupos. Si $G$ se puede proyectar sobre $K$ pero $H$ no se puede proyectar en $K$ entonces $G\neq H$. Resulta que si ponemos $K=\mathbb{Z}$ se mandan todos los generadores a $1$, entonces no nos sirve (checar la conjetura de Fico).
+Un grupo particularmente útil es $S_3=\{e, (1,2),(2,3),(3,1),(1,2,3),(1,3,2)\}$ el grupo de permutaciones de tres elementos. Si $\phi$ es dicha proyección, entonces podemos proponer $\phi(x_i)=¿(1,2), (2,3),(3,1)?$, donde en cada cruce requerimos que se satisfagan las relaciones tipo $(1,2)(2,3)(3,1)=(3,1)$, lo cual es cierto en este caso, pero no es cierto en genral para todas las parejas, entonces tampoco funciona. Pero haciendo magia de combinatoria podemos garantesira el siguiente hecho:
+
+\textbf{La coloración es un invariante} y una coloración de 3 colores garantiza que se pueda proyectar a $S_3$. Resulta que el figura 8 no es 3-coloreable, pero el trébol si. (cine)
+
+\subsection{Octubre 15}
+Comenzamos recordando el grupo fundamental del nudo figura ocho. Nos preguntamos cuántos epimorfismos $\varphi: \pi_1(\mathbb{S}^1 -k) \to D_{2n}$, donde $D_{2n}$ es el diédico de $2n$ elementos
+\begin{align}
+  D_{2n}=<r,l \quad |\quad r^n=1, \quad l^2=1,\quad  lrl=r^{-1}>
+\end{align}
+Elejimos algunos valores para $\phi(x_i)$, siendo $x_i$ los generadores, esto define un morfismo si y solo si $\phi(r_i)$ para $i=1,...4$, es decir 
+$\phi(x_3)\phi(x_1)\phi(x_3)^{-1}=\phi(x_2)$. Tenemos la siguiente observación: \textbf{Si se satisface todas las relaciones de $\phi(x_i)$ sus conjugados son:}
+
+\begin{align}
+ \phi(x_1)=r^l \implies w r^l w^{-1}= r^{\pm k}
+\end{align}
+
+lo cual no define un epimorfismo. Entonces elegimos mejor $\phi(x_1)=lr^k$. Qué pasa cuando lo conjugamos? esto es $l(lr^k)l=lr^{-k}$, y $r(lr^k)r^{-1}=r^{k-2}$. Esto es mas prometedor. Vamos a elegir una $k_i$ para cada generador $x_i$, de tal manera que $\phi(x_i)=lr^{k_i}$, de esta manera $\phi(x_1)\phi(x_2)=r^{k_2-k_1}$ nos permite generar potencias de $r$.
+
+Entonces, buscamros $k_1,k_2,k_3,k_4$ que satisfagan las siguientes relaciones:
+\begin{itemize}
+  \item $\varphi(x_3)\varphi(x_1)\varphi(x_3)^{-1}=\varphi(x_2) \implies 2k_3\equiv k_1+ k_2\; (\mod n)$ 
+  \item Usando la relación anterior $\varphi(x_4)\varphi(x_2)\varphi(x_4)^{-1}=\varphi(x_3) \implies 2k_4\equiv k_2+ k_3\; (\mod n)$ 
+  \item Similarmente $k_4+k_1 \equiv  k_2\;(\mod n)$ 
+\end{itemize}
+También del ultimo cruce tenemos una relación superflua $k_4+k_1 \equiv 3k_2\; (\mod n)$, lo que se puede probar sumando las tres anteriores. Entonces tenemos que encontrar números $k_i$ y un entero $n$ tal que las anteriores relaciones se cumplan. 
+
+Sin pérdida de generalidad podemos poner $k_4=0$ ya que existe un isomorfismo $D_{2n} \to r^{-k_4} D_{2n}$ en el que el nuevo valor de $\phi(x_4)=r^0$. Las ecuaciones resultantes son 
+\begin{itemize}
+  \item $x+y \equiv 2z \mod n$
+  \item $y+z\equiv 0 \mod n $
+  \item $z-2x\equiv 0 \mod n$
+\end{itemize}
+Reduciendo el sistema con Gauss Jordan (de todas las cosas) tenemos que $-5z\equiv 0 \mod n$ nos da una solución. Esto implica que $n$ tiene que ser múltiplo de $5$. Podemos tomar $z=1$ y entonces $y=4$, $x=3$. Resulta que el determinante de la matriz de que define el sistema de ecuaciones de arriba es un invariante del nudo y se llama ``\textbf{Determinante del nudo}'' y se denota $\det (k)$.
+
+\begin{theorem}[]
+  Existe el epimorfismo $\pi_1 (\mathbb{S}^1- k)\to D_{2n}$ si y solo si $n|\det(k)$.
+\end{theorem}
+
+Fox desarrolló un invariante todavía mas fuerte, en el que el determinante del nudo es solo un caso especial. Este es 
+\begin{definition}[Derivada de fox]
+  Dada una presentación de grupos $<x_i\; | \;r_j >,\quad i=1,...n., \; j=1,.. ,m$, uno define la derivada de fox como la suma de las palabras de cada vez que te encuentres $x_i$. Se denota como una derivada parcial usual.
+  \begin{align}
+    \frac{\partial w}{\partial x_i} \in \mathbb{Z}F(x_i).
+  \end{align}
+  Donde $F(x_i)$ es el grupo libre, entonces la derivada de fox pertenece al anillo de $\mathbb{Z}$ sobre el grupo libre.
+\end{definition}
+
+La matriz generada por las derivadas de fox, es decir la matriz cuyas entradas son $(M)_{ij}= \frac{\partial r_i}{\partial x_j}$ es casi un invariante de nudo. Lo único que falta es permitir modificaciones gracias a las movidas de Tait, que nos permiten 
+
+\begin{itemize}
+  \item Permutar renglones y columnas 
+  \item Agrupar un renglón de 0's 
+  \item Agregar un múltiplo por la derecha de cualquier renglón a otro o columna a otra. 
+  \item Multiplicar cualquier renglón por $\pm x_i$ por la izquierda o multiplicar cualquier columna por la derecha. 
+  \item Extiende M.
+\end{itemize}
+
+
+\section{Bibliografía}
+\begin{itemize}
+  \item quick trip through knot theory | Fox 
+  \item Introduction to Knot theory | Lickorish  
+\end{itemize}
+
+
+\end{document}

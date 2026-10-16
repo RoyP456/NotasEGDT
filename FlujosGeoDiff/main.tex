@@ -1,0 +1,360 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Flujos geométricos}
+\author{Dr. Jimmy Petean | jimmy@cimat.mx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+    \section{Octubre 12}
+  Comenzamos hablando de curvas en el plano, estrictamente curvas parametrizadas, es decir un mapa $\alpha: I \to \mathbb{R}^2$, a la cual le pedimos que $\alpha$ sea diferenciable $C^\infty$. Lo que nos interesa realmente es el dibujo, es decir la traza de $\alpha$, $\text{Traza}(\alpha)$ o su imagen. Nos interesa pensar en el dibujo que se puede paranetrizar de muchísimas maneras. Recordamos que una reparametriación de $\alpha$ es el considerar algún mapa $\varphi: J \to I$ que sea suave, diferenciabl y bijectiva  de tal manera, $\alpha\circ\varphi$ es una reparametriación de $\alpha$. Evidentemente $\alpha\circ\varphi$ tiene la misma traza que $\alpha$.
+
+  Por ejemplo podemos considerar $\alpha(t)= (\cos t, \sin t), t\in \mathbb{R}$, entonces $\varphi(t)=2t$ es define una reparametriación $\alpha\circ\varphi=(\cos 2t, \sin 2t)$.
+
+
+  Una curva $\alpha$ se dice regular si $\alpha'(t)\in \mathbb{R}^2$ nunca es $0$, es decir $\alpha'(t)\ne0$. Decimos que la longitud de una curva $\alpha: (a,b)\to \mathbb{R}^2$ es 
+  \begin{align}
+    \int_{a}^{b} \|\alpha'(t)\| \mathrm{d}t.
+  \end{align}
+  Lo obvio es que la longitud de $\alpha$ es invariante bajo reparametrizaciones.Si definimos 
+  \begin{align}
+    s(t)=\int_{a}^{t} \|\alpha(r)\|\mathrm{d}r
+  \end{align}
+  nos define la longitúd de arco de la curva restringida a $(a,t)$. Podemos calcular trivialmente $s'(t)=\|\alpha'(t)\| > 0$ entonces $s$ es bijectiva y podemos poner $s:J\to (a,b)$ donde $s^{-1}(t)' = 1/ (s'(s^{-1}(t)))$. Entonces tenemos $\alpha\circ s^{-1}$ tiene derivada unitaria. A esta reparametrización se le conoce como reparametriación por longitud de arco.
+
+  Decimos que $\alpha$ está parametrizada por longitúd de arco si la norma de $\alpha'(t) $ es unitario $\forall t$. Además existe un único vector $n(s)$ tal que $\alpha\cdot n (s)=0$  y $\det{(\alpha'(s),n(s))}=1$. Esto nos define una base para $\mathbb{R}^2$ que está el egida en función del a curva. 
+   $\alpha''(s)$ entonces mide en qué dirección se curva $\alpha$. Como $\alpha' \cdot \alpha'=1$ entonces tenemos que $\alpha''(s)$ es ortogonal a $\alpha'(s)$ y podemos escribir $\alpha''(s)=\kappa(s) n(s)$, donde $\kappa: (a,b)\to \mathbb{R}$. A $\kappa$ se le llama la curvatura de $\alpha$ en $s$.
+   Sin embargo no siempre es fácil encontrar una parametrización de arco. En general tenemos que encontrar un modo de trabajar con cualquier $\alpha$ regular. tenemos la siguiente expresión 
+   \begin{align}
+      \kappa(s) =\frac{\beta_1'\beta_2''-\beta_1'' \beta_2 '}{\|\beta'\|^3}(s)
+    \end{align}
+    que es la de siempre pero ya absorbiendo el producto punto con $z$.
+
+
+    \section{Octubre 13}
+
+    De hacer una cuenta sencilla uno obtiene que si $T$ es el vector tangente entonces $T'=\kappa n $ y $n'=-\kappa T$. Esto se puede ver tomando las derivadas de una curva parametrizada por arco. Entonces tenemos 
+
+    \begin{align}
+      \frac{\partial T}{\partial t }= \kappa n \frac{\mathrm d s}{\mathrm d t} \qquad,\text{y}\qquad \frac{\partial n}{\partial t} = -\kappa T \frac{\mathrm d s }{\mathrm d t}
+    \end{align}
+
+    A estas ecuaciones se les conoce como el cuadro de Frenet en dos dimensiones. Ya sabemos que el cuadro de Frenet en $\mathbb{R}^3$ es ligeramente mas complicado pues involucra la torsión $\tau$.
+
+    \subsection{Integración sobre curvas}
+    Un comentario pequeño acerca de la integración sobre curvas: Queremos integrar una función sobre la curva (la traza de la curva), la función está dada por una función definida en $(a,b)$. Uno puede pensar que esto es
+    \begin{align}
+      \int_{a}^{b} f(t) \mathrm{d} t.
+    \end{align}
+Pero esto no es independiente de la parametrización. Esto motiva la siguiente definicion.
+\begin{definition}[Integral natural]
+  Se define la integral natural sobre la curva como 
+  \begin{align}
+  \int_\gamma f = \int_{a}^{b} f(t) \|\alpha'(t)\|\mathrm{d} t .
+  \end{align}
+\end{definition}
+La anterior definición tiene la particularidad de que $f(t)=1$ hace que la integrlan natural sobre $f(t)$ sea la longitúd de la curva. 
+
+\subsection{Flujos}
+Consideramos la función $f(x,y,z)=x^2+y^2+z^2$. Buscamos un camino $\varphi$ que salga de un punto $(x_0,y_0,z_0)$ y que llegue al origen. Consideramos $F\circ \varphi : [0,t] \to \mathbb{R}$. Al tomar la derivada tenemos 
+\begin{align}
+  \frac{\mathrm d F\circ \varphi }{\mathrm d t} =  \nabla F \cdot \varphi' &\geq -|\nabla F \cdot \varphi'| \\
+                                                                           & \geq -\|\nabla F\| \|\varphi'\| 
+\end{align}
+Entonces queremos elegir $\varphi$ de tal manera que $\varphi'=-\nabla F$ nos da la curva con la que $F$ decrece lo más rápido. Calculamos 
+\begin{align}
+  \nabla F &= (2x, 2y,2z) \\
+  \varphi' &= (\varphi_1',\varphi_2',\varphi_3')=-(2\varphi_1 ,2\varphi_2 ,2\varphi_3) 
+\end{align}
+O en otras palabras la ultima equivalencia es $\varphi' = - 2 \varphi \longrightarrow \lambda e^{-2 t}$. Dadas las condiciones iniciales tenemos 
+\begin{align}
+  \varphi(t)=e^{-2t}(x_0,y_0,z_0)
+\end{align}
+
+Ahora, vamos a intentar hacer el mismo procedimiento pero en situaciones más complicadas. Vamos a considerar el caso en el que el espacio es \{curvas regulares cerradas simples\} y la función es la longitud.
+
+Consideremos una curva en el espacio mencionado. Sea $c: (-\varepsilon , \varepsilon ) \to \{\text{curvas}\}$. Para cada $s\in (-\varepsilon,\varepsilon)$ tenemos unas curvas $c_s: [a,b]\to \mathbb{R}^2$. Entonces una curva en el espacio de curvas es un mapeo $\alpha: [a,b]\times (-\varepsilon,\varepsilon)\to \mathbb{R}^2$, para cada $s\in (-\varepsilon,\varepsilon)$ considero $\alpha_s=\alpha(\cdot,s):[a,b]\to \mathbb{R}^2$.  Veamos que el vector tangente a la curva en $s=0$, $\frac{\partial\alpha}{\partial s}(\cdot, 0):[a,b] \to \mathbb{R}^2$ es una curva misma.
+
+Consideramos nuestra curva en el espacio de curvas y queremos ver en qué dirección mover las curvas es decrecer la longitud lo más rápido posible.
+
+Sea $\alpha$ como antes y llamamos $V=\left \frac{\partial \alpha }{\partial s}\right|_{s=0}$. Calculamos $l(\mu)=l(\alpha_\mu: [a,b]\to \mathbb{R}^2)$ y $\left \frac{\partial l}{\partial \mu}\right|_{\mu=0}$. Tenemos 
+\begin{align}
+  l(\alpha_\mu)&=\int_{a}^{b} \sqrt{\alpha'_\mu\cdot \alpha'_\mu} \mathrm{d}t \\
+  \frac{\partial}{\partial\mu} l(\alpha_\mu)&=\frac{\partial}{\partial \mu } \int_{a}^{b} \sqrt{\alpha'_\mu\cdot \alpha'_\mu}\mathrm{d}t
+\end{align}
+La ultima ecuación se escribe como 
+\begin{align}
+  =\int_{a}^{b}\frac{\frac{\partial^2\alpha}{\partial\mu\partial t }\cdot \frac{\partial \alpha}{\partial t}}{\|\alpha'\|}\mathrm{d}t
+\end{align}
+De ahora en adelante vamos a usar notación compacta. Esto es 
+\begin{align}
+  \partial_\mu l(\alpha_\mu)= \int_{a}^{b} \frac{\partial_t \partial_\mu \alpha \cdot \partial_t \alpha }{\|\alpha\|}\mathrm{d} t
+\end{align}
+Donde hemos usado que las derivadas conmutan. Ahora, dado que es una curva cerrada simple podemos integrar por partes y obtener 
+\begin{align}
+  =-\int_{a}^{b}\frac{\mathrm d}{\mathrm d t} \left( \frac{\alpha'}{\|\alpha'\|}\right)\partial_\mu \alpha \mathrm{d} t.
+\end{align}
+Entonces, este es el análogo al gradiante en el  ejemplo anterior, siguiendo el procedimiento queremos que 
+\begin{align}
+  \partial_\mu \alpha =\partial_t\left(\frac{\alpha'}{\|\alpha'\|}\right)
+\end{align}
+Podemos ahora tomar los resultados del cuadro de Frenet. Vemos que la ultima integral se puede escribir como 
+\begin{align}
+  \int_{a} ^{b} \frac{1}{\|\alpha'\|}\frac{\mathrm d}{\mathrm d t} \left( \frac{\alpha'}{\|\alpha'\|}\right)\partial_\mu \alpha \|\alpha'\|\mathrm{d} t= \int_{a}^{b } \kappa n
+\end{align}
+Noice. \newpage
+
+\begin{definition}[Flujo de acortamiento de las curvas]
+  Son las soluciones a  CSF  $\alpha: [a,b]\times [0,T]\to \mathbb{R} ^2$
+
+  \begin{align}
+    \partial_\mu \alpha = \kappa n.
+  \end{align}
+\end{definition}
+Esta es una ecuación altamente no lineal. Curioiosamente $\partial_\mu\alpha = \partial^2_s \alpha$ es equivalente, e interesantemente es la ecuación del calor.
+
+A pesar de la grande no linealidad de la ecuación, podemos encontrar algunas soluciones simples.
+\begin{itemize}
+  \item Los puntos fijos del flujo son las rectas ya que $\kappa =0$. De esta manera $\alpha(t,\mu)=p+tv$ es una solución
+  \item Supongamos que $\alpha(t)=(\cos t, \sin t).$ Visualmente vemos que un círculo no se deforma bajo CSF, así que $\alpha(t,\mu)=f(\mu)(\cos t, \sin t)$ es una solución con $f(0)=1$. Podemos verificar esto. Para que funcione se tiene que 
+    \begin{align}
+      \partial_\mu \alpha &= f'(\mu)(\cos t, \sin t) \\
+      \kappa n &= \frac{1}{f(\mu)}(-\cos t, -\sin t).
+    \end{align}
+    Juntando ambas ecuaciones $f'f=-1$. La solución es $f(\mu)=\sqrt{A-2\mu}$ y como necesitamos que $f(0)=1$ entonces $A=1$.
+    \begin{align}
+    f(\mu)= \sqrt {1-2\mu}
+    \end{align}
+  Esta función está definida para $\mu\in [0,1/2]$.
+\end{itemize}
+
+\section{Octubre 14}
+\subsection{Cuentas elementales}
+Sea $\alpha: [a,b]\times [o,T)\to \mathbb{R}^2$ una solución al CSF.
+\begin{align}
+  \frac{\partial\alpha}{\partial \mu }=\kappa n , \qquad \alpha(t,0)=\alpha_0(t)
+\end{align}
+\textbf{Lema 1:} Vamos a derivar la norma de $\alpha'$. Esto es $\partial_\mu \|\alpha' \|= -\kappa^2 \|a'\|$ donde $\alpha'=\partial_t$. Demostración:
+\begin{align}
+  \partial_\mu \|\alpha'\|&=\frac{\alpha' \partial_\mu \alpha'}{\sqrt{\alpha'\cdot\alpha'}} \\
+                          &= \frac{\alpha' \cdot \partial_t (\kappa n )}{\|\alpha'\|}\\
+                          &= \frac{\alpha' \cdot (-\kappa \alpha')}{\|\alpha'\|}\\
+                          &= -\kappa^2 \|\alpha'\|
+\end{align}
+\begin{theorem}[]
+  Si $\alpha(t,\mu)$ es una solución al CSF entonces 
+  \begin{align}
+    \partial _\mu l(\alpha_\mu)= \int_{0}^{l_\mu}-\kappa^2 (s) \mathrm{d} s
+  \end{align}
+\end{theorem}
+\textbf{Demostración:} La prueba es solo una cuenta fea que toma en cuenta lo que ya habíamos hecho.
+\begin{align}
+  l(\alpha_\mu)&=\int_{a}^{b}\|\alpha'\|\mathrm{d} t \\
+  \partial_\mu l(\alpha_\mu) &=-\int_{a}^{b} \kappa^2 \|\alpha'\| \mathrm{d}t \\
+             &= \int_{0}^{l_\mu} -\kappa ^2(s)\mathrm{d} s \\ 
+\end{align}
+Efectivamente la longitud de la curva decrece con el tiempo. Con esto proponemos otro lema.
+\textbf{Lema 2:} Si $\alpha$ es solución del CSF entonces 
+\begin{align}
+  \partial_\mu \bm{T}&=\partial_s \kappa n \qquad \text{y} \\
+  \partial_\mu n = -\partial_s \kappa \bm{T}
+\end{align}
+Demostración: La prueba es también una cuentita.
+La primera ecuación se demuestra al poner 
+\begin{align}
+  \partial\mu \bm{T}&= \partial_\mu\partial_s \alpha \\
+                    &= \partial_\mu (\frac{\alpha'}{\|\alpha'\|})\\ 
+                    &= \frac{\kappa^2\|\alpha'\|}{\|\alpha'\|^2 }\alpha' + \frac{1}{\|\alpha'\|}\partial_\mu \partial_t\alpha\\ 
+                    &= \frac{\kappa}{\|\alpha'\|}\alpha  \\ 
+\end{align}
+Hacemos mas cuentas con el cuadro de frenet que no pienso escribir :) Para el segundo resultado también sale directo a partir de que $\mathbb{T}\cdot n =0$ y usando el primer resultado 
+\begin{align}
+  \partial_t \bm{T} \cdot n + \bm{T}\partial_t n =0 \\ 
+\end{align}
+pero $n\cdot n=1$ entonces al usar la ecuación del flujo también tenemos
+\begin{align}
+  \partial_\mu n = - \partial_s \kappa \bm{T}
+\end{align}
+    Establecemos el siguiente teorema \newpage
+
+    \begin{theorem}[]
+      Se $\alpha$ es solucón al CSF tal que $\alpha_\mu$ es una curva cerrada simple, y si llamamos $A(\mu)$ el área encerrada por $\alpha_\mu$ entonces 
+      \begin{align}
+        \partial_\mu A(\mu) = -2\pi 
+      \end{align}
+    \end{theorem}
+
+    \textbf{Demostración: } Esta es la ultima cuenta se supone.
+    Sabemos que nuestra formula para el área $A(\mu)$ se escribe como 
+    \begin{align}
+      A(\mu)&=\frac{1}{2} \int_{a}^{b} (\alpha_1 \alpha_2 ' -\alpha_1'\alpha_2)(t)\mathrm{d} t \\ 
+            &=-\frac{1}{2}\int_{a}^{b}\|\alpha'\| \alpha \cdot n \mathrm{d} t 
+    \end{align}
+    Ahora derivamos y tenemos que al usar todos los lemas y teoremas que ya demostramos
+    \begin{align}
+      \partial_\mu A(\mu)&= \frac{1}{2}\int_{a}^{b}\kappa^2\|\alpha'\| \alpha\cdot n \mathrm{d} t -\frac{1}{2} \int_{a}^{b} \|\alpha'\|(\kappa n\cdot n)- \|\alpha'\|\alpha \cdot (-\partial_s \bm{T})\mathrm{d} t \\
+    \end{align}
+     Al desarrollar e integrar por partes esto es 
+     \begin{align}
+       =\int_a^b\kappa(\alpha'\cdot \bm{T})\mathrm{d} t= -2\pi
+      \end{align}
+
+      Entonces tomamos alguna curva cerrada simple $\alpha_0$ y tratamos de resolver el CSF con esa condición inicial. Primero se demuestra que al menos existe localmente alguna solución en $[a,b]\times [0,\varepsilon]$, y por el último teorema se puede ver hasta donde se puede extender la solución, $[0,T_m]$. Además sabemos que $T_m \leq A/2\pi$ donde $A= \text{Área}(\alpha_0)$.
+
+      Se demuestra que mientras se tiene una cota inferior positiva para el área encerrada, se tiene una cota para la curvatura. Esto no es nada trivial y no lo demostraremos en estas notas. Entonces la curvatura converge y las curvas convergen. Vamos a checar que la curva se mantiene simple a lo largo del flujo. Para ver que las curvas se mantienen simples consideremos la función 
+      \begin{align}
+        f(t_1,t_2, \mu)=\|\alpha(t_1,\mu)-\alpha(t_2,\mu)\|
+      \end{align}
+      $f:[a,b]\times[a,b)\times [0,T)\to \mathbb{R}^+$ y vamos a poder demostrar que si $f(t_1,t_2,\mu)=0$ entonces $t_1=t_2$. Usaremos los siguientes lemas y teoremas.
+      \textbf{Lema A:} $f$ verifica que $\partial_\mu-\Delta_s f = -4 $. No se prueba aquí.
+      \begin{theorem}[]
+        Sea $\alpha$ una solución al CSF. Supongamos que existe $c>0$, tal que $|\kappa|\leq c$ y que $\alpha_0$ es simple. Entonces $\forall \mu \in [0,T), \alpha_\mu$ es simple.
+      \end{theorem}
+      \textbf{Demostración:} $f$ está definida en $[a,b]\times[a,b]\times [0,T)$ vamos a elegir $r>0$ chico y considerar  $E = \{(t_1,t_2,\mu): l(t_1,t_2,\mu) < r\}$. $f|E$ verifica lo que queremos, entonces nos fijamos en $E^c$ y observamos el borde. Entonces $\inf_{\partial E^c} f =m>0 $ y $f$ se mantiene positivo en $E^c$. Terminamos! 
+
+      Para cualquier $\varepsilon> 0$ chico consideramos la función $g(t_1,t_2,\mu)= f(t_1,t_1,\varepsilon)+\varepsilon\mu$. Si el mínimo de $f$ en $E^c$ es $<m$ por $\varepsilon>0$ chico la función $g$ se va a hacer también $<m$. Entonces $g$ también toma valores $<m$ en el interior. Elegimos $\delta>0$ lo suficientemente chico de modo que $g< m-\delta $. Buscamos el primer momento en que existe $t_1,t_2,\mu_0$ en el interior del complemento tal que $g(t_1,t_2,\mu_0)=m-\delta$. 
+      Vamos a hacer las cuentas en este punto para llegar a una contradicción. Notar que $t_1,t_2$ es el mínimo local de $g$ y de $f$ para $\mu_0$ fijo. Además sabemos que 
+      \begin{align} \label{cont}
+        \partial_\mu g (t_1,t_2,\mu) \leq 0 
+      \end{align}
+
+      Ahora calculamos el laplaciano de $f$. Primero als derivadas parciales
+      \begin{align}
+        \partial_{s_1} f &= 2(\alpha(s_1,\mu_0)-\alpha(s_2,\mu_0))\bm{T}(t_1,\mu_0) =0 \\
+        \partial_{s_2} f &= -2(\alpha(s_1,\mu_0)-\alpha(s_2,\mu_0))\bm{T}(t_2,\mu_0)=0 
+      \end{align}
+      Ambos son $0$ y que estamos parados en el mínimo; esto implica $\bm{T}(t_1,\mu_0)=\bm{T}(t_2,\mu_0)$. Si volvemos a derivar tenemos 
+      \begin{align}
+        \partial_{s_1}\partial_{s_1}f=-2
+      \end{align}
+      Como $(t_1,t_2)$ es un mínimo local entonces el Hessiano es semidefinido positivo. En particular su determiante es $\geq 0$. Esto es 
+      \begin{align}
+        \partial_{s_1}^2 f \partial_{s_2}^2 f - \partial_{s_1}\partial_{s_1}f\geq 0,
+      \end{align}
+      que por la cuenta anterior 
+      \begin{align}
+        \partial_{s_1}^2 f \partial_{s_2}^2 f \geq 4.
+      \end{align}
+      Al comparar con el laplaciano tenemos entonces
+      \begin{align}
+        \Delta f - 2\sqrt{\partial_1^2 f}\sqrt{\partial_2^2f}\geq 0
+      \end{align}
+      Pero ahora comparando con $g$ vemos la contradicción.
+      \begin{align}
+        \partial_\mu g = \partial_\mu f + \epsilon = \Delta f - 4 + \epsilon > 0.
+      \end{align}
+
+      Esto es una contradicción cuando tommos en cuenta (\ref{cont}). 
+      Ahora considera el siguiente teorema:
+
+      \begin{theorem}[]
+        Comenzamos con una curva cerrada simple. El flujo continúa y mantiene la curva simple hasta $T=A/2\pi$. Se puede ver que a medida que la curva colapsa se hace mas circular.
+      \end{theorem}
+      Para formalizarlo y demostrarlo se considera una renormalización del flujo.
+      \begin{align}
+        \partial_\mu = \kappa n \longrightarrow \bar{\alpha}(t,\mu) = \frac{\alpha(t,\mu)}{l(\alpha_\mu)}
+      \end{align}
+
+
+      \section{Octubre 15}
+      \footnotesize{Parte de las últimas demostraciones también fueron hechas este día, pero las pongo en el anterior por motivos de complitud.}
+      \subsection{Cómo generalizar?}
+
+      \subsubsection{Sobre superficies}
+
+      Cómo podemos generalizar el CSF en el plano. Consideramos una cirva cerrada simple contenida en una superficie regular $S \subset{ \mathbb{R}^3}$.  Entonces podemos considerar la curva sobre la superficie $S$. La ecuación de CSF se convierte en 
+      \begin{align}
+        \partial_\mu \alpha = \pi (\partial^2_s \alpha)
+      \end{align}
+      Donde $\pi$ es la proyección al plano tangente. La curvatura de la curva sería $\|\partial^2_s \alpha\|$.
+      \subsubsection{Espacios de dimensión mas alta}
+      También podemos hacer un flujo sobre espacios de dimensión más alta. Por ejemplo considera una superficie $S\subset \mathbb{R}^3$ a la que queremos hacer fluir. Hacemos prácticamente lo mismo, ahora usando el vector tangente y la curvatura media $\kappa_n$. 
+      \begin{align}
+        \partial_\mu = \kappa_m n
+      \end{align}
+      Esto tiene sus problemas ya que no toda la supericie se aplasta al mismo tiempo. Para esto, una solución barata es la cirugía, donde nos volamos las partes problemáticas a mano. Lo mismo se puede hacer para espacios de cualquier dimensión.
+      \subsubsection{Flujos intrínsicos}
+
+
+      Técnicamente consideramos una variedad Riemmaniana $(M,g)$. Estos espacios tienen una noción de curvatura (de Riemman). Pero esto es much más complicado. Dado cualquier punto $p\in M$ y cualquier plano contenido en el espacio tangente nos da un número. Tenemos que encontrar una función que mapee $g\longrightarrow\text{Promedio de las curvaturas}$. Particularmente la funcional de Hilbert-Einstein 
+      \begin{align}
+          S=\int_{M}R\sqrt{g} \mathrm{d} m
+      \end{align}
+       Entonces consideramos el flujo gradiente de este funcional y se va a ver como $g(x,\mu)$ de tal manera que 
+       \begin{align}
+        \partial_\mu g =  -2 \text{Ricci}_\mu 
+       \end{align}
+       a lo que se le conoce como el flujo de Ricci una vez que se renormaliza. Los puntos fijos del flujo generalizado son los puntos críticos del funcional Hilbert-Einstein, se llaman métricas de Einstein y satisfacen una ecuación del estilo $R=\lambda g$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      \section{Bibliografía:}
+        
+\end{document}
+
+
